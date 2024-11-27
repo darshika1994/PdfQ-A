@@ -20,7 +20,9 @@ This web application allows users to upload a PDF document and ask questions rel
 You can install the required dependencies by running:
 ```bash
 pip install -r requirements.txt
+```
 
 Run the app using:
 ```bash
 streamlit app run.py
+```
