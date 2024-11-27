@@ -17,10 +17,12 @@ This project allows users to upload PDF documents and ask questions about the co
    ```
    git clone <repository-url>
    ```
+
 2. Install dependencies:
    ```
    pip install -r requirements.txt
    ```
+
 3. Run the app:
    ```
    streamlit run app.py
