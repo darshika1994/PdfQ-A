@@ -25,9 +25,3 @@ This project allows users to upload PDF documents and ask questions about the co
    ```
    streamlit run app.py
    ```
-
-## License:
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
-
-You can create the `README.md` file in the root of your project and copy-paste the above content into it. This will help users understand what your project is, how to use it, and any requirements.
