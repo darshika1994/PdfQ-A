@@ -17,13 +17,28 @@ groq_api_key=os.getenv('GROQ_API_KEY')
 os.environ["GOOGLE_API_KEY"]=os.getenv("GOOGLE_API_KEY")
 
 ###
-
+st.set_page_config(page_title="Chat with documents 📚", page_icon="📚")
 st.sidebar.image("logo-PDF-Analyzer-website.png", caption="Smart PDF Explorer", use_container_width=True)
-
-
 ###
 
-st.title("Smart PDF Explorer & Q&A Tool")
+# Add custom CSS
+st.markdown("""
+    <style>
+    .main-title {
+        text-align: center;
+        color: #4CAF50;
+        font-family: 'Arial', sans-serif;
+    }
+    .custom-box {
+        background-color: #f9f9f9;
+        border: 2px solid #4CAF50;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+st.markdown("<h1 class='main-title'>Interactive PDF Explorer</h1>", unsafe_allow_html=True)
 
 llm=ChatGroq(groq_api_key=groq_api_key,
              model_name="Llama3-8b-8192")
@@ -45,19 +60,37 @@ def vector_embedding():
     if "vectors" not in st.session_state:
 
         st.session_state.embeddings=GoogleGenerativeAIEmbeddings(model = "models/embedding-001")
-        st.session_state.loader=PyPDFDirectoryLoader("./us_census") ## Data Ingestion
+        st.session_state.loader=PyPDFDirectoryLoader("./Research_Papers") ## Data Ingestion
         st.session_state.docs=st.session_state.loader.load() ## Document Loading
         st.session_state.text_splitter=RecursiveCharacterTextSplitter(chunk_size=1000,chunk_overlap=200) ## Chunk Creation
         st.session_state.final_documents=st.session_state.text_splitter.split_documents(st.session_state.docs[:20]) #splitting
         st.session_state.vectors=FAISS.from_documents(st.session_state.final_documents,st.session_state.embeddings) #vector OpenAI embeddings
 
 
+# if st.button("Please first Prepare Documents for Q&A"):
+#     vector_embedding()
+#     st.write("Documents processed!✅")
+
+
+# Add this to initialize the session state at the start of your script
+if "docs_processed" not in st.session_state:
+    st.session_state.docs_processed = False  # Initialize session state flag
+
+# Update your button logic
 if st.button("Please first Prepare Documents for Q&A"):
-    vector_embedding()
+    with st.spinner("Processing documents..."):
+        try:
+            vector_embedding()  # Your document processing logic
+            st.session_state.docs_processed = True
+        except Exception as e:
+            st.session_state.docs_processed = False
+            st.error(f"An error occurred: {e}")
+
+# Display confirmation message
+if st.session_state.docs_processed:
     st.write("Documents processed!✅")
 
 prompt1=st.text_input("Ask a question about the selected document")
-
 
 import time
 
@@ -66,7 +99,7 @@ def load_pdf_files(folder_path):
     return [f for f in os.listdir(folder_path) if f.endswith('.pdf')]
 
 # Sidebar for PDF selection
-folder_path = "./us_census"  # Folder containing PDFs
+folder_path = "./Research_Papers"  # Folder containing PDFs
 st.sidebar.title("PDF Document Viewer")
 pdf_files = load_pdf_files(folder_path)
 
@@ -93,4 +126,6 @@ if prompt1:
         for i, doc in enumerate(response["context"]):
             st.write(doc.page_content)
             st.write("--------------------------------")
+
+
 
