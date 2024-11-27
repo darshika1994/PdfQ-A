@@ -16,7 +16,11 @@ load_dotenv()
 groq_api_key=os.getenv('GROQ_API_KEY')
 os.environ["GOOGLE_API_KEY"]=os.getenv("GOOGLE_API_KEY")
 
-st.title("Gemma Model Document Q&A")
+###
+st.sidebar.image("logo-PDF-Analyzer-website.png", caption="Smart PDF Explorer", use_container_width=True, width=50)
+###
+
+st.title("Smart PDF Explorer & Q&A Tool")
 
 llm=ChatGroq(groq_api_key=groq_api_key,
              model_name="Llama3-8b-8192")
@@ -45,18 +49,29 @@ def vector_embedding():
         st.session_state.vectors=FAISS.from_documents(st.session_state.final_documents,st.session_state.embeddings) #vector OpenAI embeddings
 
 
-
-
-
-prompt1=st.text_input("Enter Your Question From Documents")
-
-
-if st.button("Documents Embedding"):
+if st.button("Prepare Documents for Q&A"):
     vector_embedding()
-    st.write("Vector Store DB Is Ready")
+    st.write("Documents processed!✅")
+
+prompt1=st.text_input("Ask a question about the selected document")
 
 import time
 
+def load_pdf_files(folder_path):
+    """Load PDF files from a given folder."""
+    return [f for f in os.listdir(folder_path) if f.endswith('.pdf')]
+
+# Sidebar for PDF selection
+folder_path = "./us_census"  # Folder containing PDFs
+st.sidebar.title("PDF Document Viewer")
+pdf_files = load_pdf_files(folder_path)
+
+if pdf_files:
+    selected_pdf = st.sidebar.selectbox("Select a PDF to view", pdf_files)
+
+    # You can add any functionality here when a PDF is selected, e.g., load the document
+else:
+    st.sidebar.write("No PDFs found in the folder!")
 
 
 if prompt1:
