@@ -1,6 +1,6 @@
 # PDF Q&A Tool
 
-The **PDF Q&A Tool** uses the **Groq Llama3-8b-8192** model for generating responses based on the content of the PDF documents. This model is part of the Groq AI platform, which provides high-performance computing for tasks like natural language processing and document analysis. Specifically, it is utilized to understand and process the queries asked by users in relation to the document's context, enabling accurate and efficient responses based on the embedded content from the PDFs.
+The **PDF Q&A tool** currently uses research papers from ScienceDirect, focusing on mental health studies. The tool processes the content of these papers by converting them into embeddings and uses the **Groq Llama3-8b-8192** model to analyze and answer questions based on the information from the document. The model helps extract relevant answers to user queries related to mental health topics in the research papers. The overall goal is to provide an easy way to explore and understand complex scientific literature using natural language processing.
 
 ## How It Works
 
