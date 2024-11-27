@@ -1,29 +1,22 @@
-```markdown
 # Document Q&A Bot
 
-This project allows users to upload PDF documents and ask questions about the content of those documents. The bot processes the document and provides answers based on the content.
+## Overview:
+This web application allows users to upload a PDF document and ask questions related to its content. Using language models and vector embeddings, the bot processes the document and returns relevant answers based on the uploaded file.
 
 ## Features:
-- Upload any PDF file for analysis
-- Ask questions related to the document's content
-- Get responses based on the content of the uploaded document
+- **PDF Upload:** Users can upload any PDF document for analysis.
+- **Question Answering:** Ask questions based on the uploaded document’s content.
+- **Context-Aware Responses:** Provides accurate answers based on the specific content of the PDF.
 
 ## Requirements:
 - Python 3.7+
-- Install dependencies from `requirements.txt`
+- Streamlit
+- Langchain
+- Google Generative AI
+- FAISS
+- PyPDF2
+- dotenv
 
-## How to Run:
-1. Clone the repository:
-   ```
-   git clone <repository-url>
-   ```
-
-2. Install dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
-
-3. Run the app:
-   ```
-   streamlit run app.py
-   ```
+You can install the required dependencies by running:
+```bash
+pip install -r requirements.txt
