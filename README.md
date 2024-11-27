@@ -1,6 +1,6 @@
 # PDF Q&A Tool
 
-This **PDF Q&A Tool** is an interactive web application that allows users to query information from PDF documents using natural language. It loads PDFs, processes them into embeddings, and then answers user queries based on the content of these documents.
+The **PDF Q&A Tool** uses the **Groq Llama3-8b-8192** model for generating responses based on the content of the PDF documents. This model is part of the Groq AI platform, which provides high-performance computing for tasks like natural language processing and document analysis. Specifically, it is utilized to understand and process the queries asked by users in relation to the document's context, enabling accurate and efficient responses based on the embedded content from the PDFs.
 
 ## How It Works
 
