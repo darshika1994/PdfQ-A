@@ -1,0 +1,13 @@
+prefix=/Users/amiketgaurav/Desktop/CISC_DataMining/googlegemini/venv
+exec_prefix=/Users/amiketgaurav/Desktop/CISC_DataMining/googlegemini/venv
+libdir=/Users/amiketgaurav/Desktop/CISC_DataMining/googlegemini/venv/lib
+sharedlibdir=/Users/amiketgaurav/Desktop/CISC_DataMining/googlegemini/venv/lib
+includedir=/Users/amiketgaurav/Desktop/CISC_DataMining/googlegemini/venv/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
