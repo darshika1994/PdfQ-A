@@ -16,10 +16,8 @@ load_dotenv()
 groq_api_key=os.getenv('GROQ_API_KEY')
 os.environ["GOOGLE_API_KEY"]=os.getenv("GOOGLE_API_KEY")
 
-###
 st.set_page_config(page_title="Chat with documents 📚", page_icon="📚")
 st.sidebar.image("logo-PDF-Analyzer-website.png", caption="Smart PDF Explorer", use_container_width=True)
-###
 
 # Add custom CSS
 st.markdown("""
@@ -67,11 +65,6 @@ def vector_embedding():
         st.session_state.vectors=FAISS.from_documents(st.session_state.final_documents,st.session_state.embeddings) #vector OpenAI embeddings
 
 
-# if st.button("Please first Prepare Documents for Q&A"):
-#     vector_embedding()
-#     st.write("Documents processed!✅")
-
-
 # Add this to initialize the session state at the start of your script
 if "docs_processed" not in st.session_state:
     st.session_state.docs_processed = False  # Initialize session state flag
@@ -109,7 +102,6 @@ if pdf_files:
     # You can add any functionality here when a PDF is selected, e.g., load the document
 else:
     st.sidebar.write("No PDFs found in the folder!")
-
 
 if prompt1:
     document_chain=create_stuff_documents_chain(llm,prompt)
