@@ -44,3 +44,5 @@ The tool uses the **Groq** language model, specifically the **Llama3-8b-8192** m
    ```bash
    streamlit app.py
    ```
+
+- View App -> https://pdfq-a-jfwjmzvtie5xvkebxblsev.streamlit.app/
